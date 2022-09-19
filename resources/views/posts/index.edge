@@ -1,0 +1,47 @@
+@layout('layouts/base')
+
+@section('body')
+<div class="d-flex justify-content-end">
+    <a href="{{route('posts.create')}}" class="btn btn-primary">New Post</a>
+</div>
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>TITLE</th>
+                <th>PUNLISHED</th>
+                <th>ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            @each(post in posts)
+            <tr>
+                <td>{{post.id}}</td>
+                <td>{{post.title}}</td>
+                <td>
+                    @if(post.published)
+                    <i class="fa fa-check"></i> 
+                    @else
+                     <i class="fas fa-times"></i>
+                    @endif
+                </td>
+                <td>
+                    <div class="btn-group gap-2">
+                        <a href="{{ route('posts.show', post )}}" class="btn btn-primary btn-sm">View</a>
+                        <a href="{{ route('posts.edit', post )}}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('posts.destroy', post )}}?_method=DELETE" method="POST">
+                            {{csrfField()}}
+                            <button type="submit"  class="btn btn-danger btn-sm">delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            @endeach
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-end mb-4">
+        <a href="{{route('home')}}" class="btn btn-link">All Post</a>
+    </div>
+</div>
+@endsection

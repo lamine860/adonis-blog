@@ -1,0 +1,38 @@
+@layout('layouts/base')
+@set('title', 'Login')
+@section('body')
+<div class="row">
+    <div class="col col-md-6">
+        <div class="card">
+            <h1 class="card-header">
+                Register
+            </h1>
+            <div class="card-body">
+                @if(flashMessages === null)
+                <p class="alert alert-danger">Invalid authentication informations</p>
+            @endif
+                <form action="{{ route('UsersController.register')}}" method="POST" enctype='multipart/form-data'>
+                    {{ csrfField() }}
+                    <div class="form-group mb-4">
+                        <label for="email" class="control-label">Email</label>
+                        <input type="text" name="email" id="email" class="form-control">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="password" class="control-label">Password</label>
+                        <input type="password" name="password" id="password" class="form-control">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="password" class="control-label">Confirm Password</label>
+                        <input type="password_confirm" name="password_confirm" id="password_confirm" class="form-control">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Register</button>
+                </form>
+                Already have an account<a href="{{route('UsersController.login')}}" class="btn btn-link">Login</a>
+            </div>
+        </div>
+    </div>
+    <div class="col col-md-6">
+        <img src="https://images.unsplash.com/photo-1662947190722-5d272f82a526?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDV8Q0R3dXdYSkFiRXd8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" width="650" height="650" alt="Unsplash image" class="img-fluid">
+    </div>
+</div>
+@endsection

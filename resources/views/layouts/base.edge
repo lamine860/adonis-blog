@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Adonis Blog | {{ title }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="/">Adonis Blog</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </ul>
+            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+              
+            @if(auth.isLoggedIn)
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{ route('posts.index')}}">Admin</a>
+            </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" type="button" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown button
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">My profile</a>
+                  <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit()">Lougout</a>
+                  <form action="{{route('UsersController.logout')}}" id="logout-form" method="POST">
+                    {{csrfField()}}
+                  </form>
+                </div>
+              </li>
+              @else
+              <a href="{{ route('UsersController.login')}}" class="nav-link">Login</a>
+              @endif
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <main class="container mt-4">
+        @if(flashMessages.has('success'))
+          <div class="alert alert-success alert-dismissible fade show">
+            {{flashMessages.get('success')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        @endif
+        @!section('body')
+    </main>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+@layout('layouts/base')
+
+@section('body')
+<div class="row">
+    <div class="col col-md-6">
+        <div class="card">
+            <h1 class="card-header">
+                Add new post
+            </h1>
+            <div class="card-body">
+                <form action="{{ route('posts.store')}}" method="POST" enctype='multipart/form-data'>
+                    {{ csrfField() }}
+                    <div class="form-group mb-4">
+                        <label for="title" class="control-label">Title</label>
+                        <input type="text" name="title" id="title" class="form-control">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="image" class="control-label">Image</label>
+                        <input type="file" name="image" id="image" class="form-control">
+                    </div>
+                    <div class="custom-control custom-checkbox mb-4">
+                        <input type="checkbox"  name="published" class="custom-control-input" id="published">
+                        <label class="custom-control-label"  for="published">Published</label>
+                      </div>
+                    <div class="form-group mb-4">
+                        <label for="body" class="control-label">Body</label>
+                        <textarea name="body"  id="body" class="form-control"></textarea>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col col-md-6">
+        <img src="https://images.unsplash.com/file-1662566218586-ab32d69fcc39image" width="650" height="650" alt="Unsplash image" class="img-fluid">
+    </div>
+</div>
+@endsection

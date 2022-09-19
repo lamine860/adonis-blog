@@ -1,0 +1,48 @@
+@layout('layouts/base')
+
+@set('title', post.title)
+
+@section('body')
+   <div class="row justify-content-md-center">
+       <div class="col col-md-8">
+        <div class="card">
+            <img src="{{post.imageUrl}}"  class="card-img img-fluid" alt="{{post.title}}">
+            <div class="card-body">
+                {{post.body}}
+            </div>
+            <div class="card-footer">
+                <h5 class="text-center">Comments</h5>
+               <div class="row justify-content-center">
+                   @each(comment in post.comments)
+                   <div class="col-md-11 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="small text-end text-primary">{{'@' + comment.username}}</div>
+                        </div>
+                        <div class="card-footer">
+                            <p>{{ comment.body }}</p>
+                        </div>
+                    </div>
+                     </div>
+                    @endeach
+               </div>
+                <form action="{{route('posts_comments.store')}}?post={{post.id}}" method="POST">
+                    {{csrfField()}}
+                    <div class="form-group mb-3">
+                        <label for="username" class="control-label">Username</label>
+                        <input type="text" id="username" name="username"  class="form-control">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="body" class="control-label">Comment</label>
+                        <textarea name="body" id="body" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+       </div>
+
+   </div>
+@endsection
